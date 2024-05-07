@@ -1,17 +1,19 @@
-## Firebase 
+## Firebase
 
 Using package :
 
 ```bash
-npm i firebase 
+npm i firebase
 npm i uuid (option)
 ```
+
 ref1: [firebase](https://www.npmjs.com/package/firebase)
-ref2: [uuid](https://www.npmjs.com/package/uuid) -> *option (use for name file before store)
+ref2: [uuid](https://www.npmjs.com/package/uuid) -> \*option (use for name file before store)
 
 Basic Usege :
 
- - Create folder **app/firebase/firebase-config.ts**
+- Create folder **app/firebase/firebase-config.ts**
+
 ```bash
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
@@ -27,10 +29,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const  storege = getStorage(app); 
+export const  storege = getStorage(app);
 ```
 
- - Call **app/page.tsx** (NextJS14)
+- Call **app/page.tsx** (NextJS14)
 
 ```bash
 "use client";
@@ -51,7 +53,7 @@ export  default  function  Home() {
 	const [fileUpload, setFileUpload] =  useState<File  |  null>(null);
 	const [fileUrls, setFileUrls] =  useState<(string  |  UploadResult)[]>([]);
 	const  fileListRef  =  ref(storege, "files/");
-	
+
 	const  uploadFile  = () => {
 		if (fileUpload  ==  null) return;
 		const  fileRef  =  ref(storege, `files/${v4()}`);
@@ -69,7 +71,7 @@ export  default  function  Home() {
 			});
 		});
 	}, []); // Empty dependency array to run effect only once
-	
+
 	return (
 		<div>
 			Learning firebase and use it for File reading and uploading
@@ -95,3 +97,61 @@ export  default  function  Home() {
 }
 ```
 
+More: Snap upload progress data (%)
+
+```bash
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+const storage = getStorage();
+
+// Create the file metadata
+/** @type {any} */
+const metadata = {
+  contentType: 'image/jpeg'
+};
+
+// Upload file and metadata to the object 'images/mountains.jpg'
+const storageRef = ref(storage, 'images/' + file.name);
+const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+// Listen for state changes, errors, and completion of the upload.
+uploadTask.on('state_changed',
+  (snapshot) => {
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log('Upload is ' + progress + '% done');
+    switch (snapshot.state) {
+      case 'paused':
+        console.log('Upload is paused');
+        break;
+      case 'running':
+        console.log('Upload is running');
+        break;
+    }
+  },
+  (error) => {
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+
+      // ...
+
+      case 'storage/unknown':
+        // Unknown error occurred, inspect error.serverResponse
+        break;
+    }
+  },
+  () => {
+    // Upload completed successfully, now we can get the download URL
+    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      console.log('File available at', downloadURL);
+    });
+  }
+);
+```
