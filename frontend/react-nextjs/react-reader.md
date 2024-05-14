@@ -7,7 +7,7 @@ npm i react-reader
 ```
 ref: [react reader](https://www.npmjs.com/package/react-reader) 
 
-Basic Usege :
+Basic Usage :
 ```bash
 import React, { useState } from 'react'
 import { ReactReader } from 'react-reader'
