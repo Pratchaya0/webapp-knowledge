@@ -200,3 +200,6 @@ export default ExampleThree;
 [Config](https://www.amcharts.com/docs/v4/getting-started/integrations/using-react/)
 
 [Demos](https://www.amcharts.com/demos-v4/) -> *Example Chart and code
+
+Result :
+![result](https://github.com/Pratchaya0/webapp-knowledge/blob/main/src/amchart-three.png)

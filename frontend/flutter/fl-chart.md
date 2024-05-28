@@ -166,3 +166,5 @@ class MyApp extends StatelessWidget {
 }
 
 ```
+Result :
+![result](https://github.com/Pratchaya0/webapp-knowledge/blob/main/src/fl_chart_ex1.png)
