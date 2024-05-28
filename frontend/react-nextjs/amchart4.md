@@ -1,4 +1,4 @@
-## Edge store
+## Amchart4
 
 Using package :
 
