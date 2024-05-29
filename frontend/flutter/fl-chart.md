@@ -1,4 +1,4 @@
-## Amchart4
+## FL chart
 
 Using package :
 
