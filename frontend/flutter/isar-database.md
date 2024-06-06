@@ -17,3 +17,4 @@ flutter pub add -d isar_generator build_runner
 
 ref1: [isar](https://isar.dev/tutorials/quickstart.html)
 
+**Now In my case it can not use with x86 device (i'm not sure)**
