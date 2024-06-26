@@ -6,4 +6,6 @@ Nodemailer is a module for Node.js applications to allow easy as cake email send
 npm install nodemailer
 ```
 
-ref: [Ethereal](https://nodemailer.com/)
+ref: [NodeMailer](https://nodemailer.com/)
+
+*other choice: [EmailEngine](https://emailengine.app/?utm_source=ethereal&utm_campaign=ethereal&utm_medium=text)
